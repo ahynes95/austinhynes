@@ -173,7 +173,7 @@ const Hero: React.FC<HeroProps> = ({
           <span className="block animate-fade-in-up animation-delay-200">
             {headline.line1}
           </span>
-          <span className="block animate-fade-in-up animation-delay-400 bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
+          <span className="block animate-fade-in-up animation-delay-400 bg-gradient-to-r from-amber-300 via-orange-400 to-amber-500 bg-clip-text text-transparent [text-shadow:0_0_40px_rgba(251,146,60,0.3)]">
             {headline.line2}
           </span>
         </h1>
