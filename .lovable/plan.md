@@ -1,27 +1,21 @@
-## Animated Shader Hero — Single Static Page
+## Change
 
-A one-page, no-scroll site: full-viewport WebGL shader background with your headline, subtitle, and two CTAs centered on top. Nothing else on the page.
+In `src/components/ui/animated-shader-hero.tsx`, update the second headline span (currently a white→white/60 gradient) so "simplified." renders in a vibrant accent color that contrasts the dark blue/purple shader.
 
-### What you'll get
+**Color choice**: warm amber-to-orange gradient (`from-amber-300 via-orange-400 to-amber-500`) with a subtle glow via `drop-shadow`. This complements the cool tones of the shader background and reads as a clear focal point.
 
-- **Full-viewport (`100vh`), no-scroll homepage** at `/` — body overflow locked so the page is fixed to the screen
-- **Animated WebGL shader background** (cosmic clouds/nebula, subtly reacts to mouse)
-- **Headline:** "Technology in Business" / "simplified."
-- **Subtitle:** "Managed services, Microsoft expertise, and web design in the Dallas, TX area."
-- **Primary CTA "Work with me"** → opens a contact form dialog (Name, Email, Message → toast confirmation)
-- **Secondary CTA "Let's build something together."** → opens the same contact form
-- **No header, no footer, no other sections** — just the hero
+### Edit
 
-### Implementation notes (technical)
+Replace the `line2` span classes:
 
-1. Add `src/components/ui/animated-shader-hero.tsx` from the 21st.dev registry. Real prop shape: `{ headline: { line1, line2 }, subtitle, buttons?: { primary?, secondary? } }` — not the flat props from the snippet you pasted; we'll use the correct API.
-2. Replace `src/routes/index.tsx` entirely (remove placeholder). Render `<Hero …>` with the content above; both buttons call `setContactOpen(true)`.
-3. Lock scroll: add `overflow-hidden` to `html`/`body` while on `/` (via a small effect in the index route, cleaned up on unmount so future routes can scroll normally).
-4. Contact dialog uses existing shadcn `Dialog`, `Input`, `Textarea`, `Button`, and `sonner` toast — no backend yet, just a success toast on submit.
-5. Update `head()` metadata in `index.tsx`: title "Technology in Business, simplified. — Dallas IT & Web Design", matching description and og tags.
-6. No new dependencies — shader is raw WebGL2, everything else already installed.
+```tsx
+<span className="block animate-fade-in-up animation-delay-400 bg-gradient-to-r from-amber-300 via-orange-400 to-amber-500 bg-clip-text text-transparent [text-shadow:0_0_40px_rgba(251,146,60,0.3)]">
+  {headline.line2}
+</span>
+```
 
-### Out of scope (can add later)
+No other files change.
 
-- Real form submission (email/database)
-- Additional routes
+---
+
+Tip: small visual tweaks like color/text changes can be done instantly (and free) via **Visual Edits** — click the Edit button in the chat box, select the element, and change the color directly.
