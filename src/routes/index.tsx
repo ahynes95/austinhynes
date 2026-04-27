@@ -47,7 +47,6 @@ function Index() {
   const [contactOpen, setContactOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  // Lock scroll while on this single-page hero.
   useEffect(() => {
     const prevHtml = document.documentElement.style.overflow;
     const prevBody = document.body.style.overflow;
@@ -61,45 +60,30 @@ function Index() {
 
   const openContact = () => setContactOpen(true);
 
- const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setSubmitting(true);
-  const form = e.currentTarget;
-  try {
-    await sendContactEmail({
-      data: {
-        name: (form.elements.namedItem("name") as HTMLInputElement).value,
-        email: (form.elements.namedItem("email") as HTMLInputElement).value,
-        message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-      },
-    });
-    setContactOpen(false);
-    toast.success("Message sent", {
-      description: "Thanks — I'll be in touch shortly.",
-    });
-  } catch {
-    toast.error("Something went wrong", {
-      description: "Please try again or email me directly.",
-    });
-  } finally {
-    setSubmitting(false);
-  }
-};
-
-    if (!res.ok) throw new Error();
-    setContactOpen(false);
-    toast.success("Message sent", {
-      description: "Thanks — I'll be in touch shortly.",
-    });
-  } catch {
-    toast.error("Something went wrong", {
-      description: "Please try again or email me directly.",
-    });
-  } finally {
-    setSubmitting(false);
-  }
-};
-  
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    const form = e.currentTarget;
+    try {
+      await sendContactEmail({
+        data: {
+          name: (form.elements.namedItem("name") as HTMLInputElement).value,
+          email: (form.elements.namedItem("email") as HTMLInputElement).value,
+          message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+        },
+      });
+      setContactOpen(false);
+      toast.success("Message sent", {
+        description: "Thanks — I'll be in touch shortly.",
+      });
+    } catch {
+      toast.error("Something went wrong", {
+        description: "Please try again or email me directly.",
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <>
