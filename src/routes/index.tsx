@@ -60,18 +60,36 @@ function Index() {
 
   const openContact = () => setContactOpen(true);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-    // No backend yet — simulate send.
-    setTimeout(() => {
-      setSubmitting(false);
-      setContactOpen(false);
-      toast.success("Message sent", {
-        description: "Thanks — I'll be in touch shortly.",
-      });
-    }, 400);
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setSubmitting(true);
+  const form = e.currentTarget;
+  const data = {
+    name: (form.elements.namedItem("name") as HTMLInputElement).value,
+    email: (form.elements.namedItem("email") as HTMLInputElement).value,
+    message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
   };
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) throw new Error();
+    setContactOpen(false);
+    toast.success("Message sent", {
+      description: "Thanks — I'll be in touch shortly.",
+    });
+  } catch {
+    toast.error("Something went wrong", {
+      description: "Please try again or email me directly.",
+    });
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   return (
     <>
