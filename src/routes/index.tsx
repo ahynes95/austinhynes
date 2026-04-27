@@ -1,3 +1,4 @@
+import { sendContactEmail } from "@/lib/contact";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -64,24 +65,26 @@ function Index() {
   e.preventDefault();
   setSubmitting(true);
   const form = e.currentTarget;
-  const name = (form.elements.namedItem("name") as HTMLInputElement).value;
-  const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-  const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
-
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${import.meta.env.VITE_RESEND_API_KEY}`,
+    await sendContactEmail({
+      data: {
+        name: (form.elements.namedItem("name") as HTMLInputElement).value,
+        email: (form.elements.namedItem("email") as HTMLInputElement).value,
+        message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
       },
-      body: JSON.stringify({
-        from: "contact@austinhynes.com",
-        to: "austinmh95@gmail.com",
-        subject: `New message from ${name}`,
-        html: `<p><strong>From:</strong> ${name} (${email})</p><p><strong>Message:</strong><br/>${message}</p>`,
-      }),
     });
+    setContactOpen(false);
+    toast.success("Message sent", {
+      description: "Thanks — I'll be in touch shortly.",
+    });
+  } catch {
+    toast.error("Something went wrong", {
+      description: "Please try again or email me directly.",
+    });
+  } finally {
+    setSubmitting(false);
+  }
+};
 
     if (!res.ok) throw new Error();
     setContactOpen(false);
