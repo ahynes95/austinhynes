@@ -21,6 +21,5 @@ export const APIRoute = createAPIFileRoute("/api/contact")({
 
     if (!res.ok) return new Response("Failed", { status: 500 });
     return new Response("OK", { status: 200 });
-    
   },
 });
