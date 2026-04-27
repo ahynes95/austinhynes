@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Managed services, Microsoft expertise, and web design in the Dallas, TX area.",
+          "IT Consulting, Cloud expertise, and web design in the Dallas, TX area.",
       },
       {
         property: "og:title",
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Managed services, Microsoft expertise, and web design in the Dallas, TX area.",
+          "IT Consulting, Cloud expertise, and web design in the Dallas, TX area.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -93,7 +93,7 @@ function Index() {
           line1: "Technology in Business",
           line2: "simplified.",
         }}
-        subtitle="Managed services, Microsoft expertise, and web design in the Dallas, TX area."
+        subtitle="IT Consulting, Cloud expertise, and web design in the Dallas, TX area."
         buttons={{
           primary: { text: "Work with me", onClick: openContact },
           secondary: {
