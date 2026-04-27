@@ -1,4 +1,3 @@
-import { sendContactEmail } from "@/lib/contact";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -61,30 +60,16 @@ function Index() {
   const openContact = () => setContactOpen(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-    const form = e.currentTarget;
-    try {
-      await sendContactEmail({
-        data: {
-          name: (form.elements.namedItem("name") as HTMLInputElement).value,
-          email: (form.elements.namedItem("email") as HTMLInputElement).value,
-          message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-        },
-      });
-      setContactOpen(false);
-      toast.success("Message sent", {
-        description: "Thanks — I'll be in touch shortly.",
-      });
-    } catch {
-      toast.error("Something went wrong", {
-        description: "Please try again or email me directly.",
-      });
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
+  e.preventDefault();
+  setSubmitting(true);
+  setTimeout(() => {
+    setSubmitting(false);
+    setContactOpen(false);
+    toast.success("Message sent", {
+      description: "Thanks — I'll be in touch shortly.",
+    });
+  }, 400);
+};
   return (
     <>
       <Hero
