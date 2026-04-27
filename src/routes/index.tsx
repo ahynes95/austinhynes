@@ -64,17 +64,23 @@ function Index() {
   e.preventDefault();
   setSubmitting(true);
   const form = e.currentTarget;
-  const data = {
-    name: (form.elements.namedItem("name") as HTMLInputElement).value,
-    email: (form.elements.namedItem("email") as HTMLInputElement).value,
-    message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-  };
+  const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+  const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+  const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
 
   try {
-    const res = await fetch("/api/contact", {
+    const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${import.meta.env.VITE_RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "contact@austinhynes.com",
+        to: "austinmh95@gmail.com",
+        subject: `New message from ${name}`,
+        html: `<p><strong>From:</strong> ${name} (${email})</p><p><strong>Message:</strong><br/>${message}</p>`,
+      }),
     });
 
     if (!res.ok) throw new Error();
