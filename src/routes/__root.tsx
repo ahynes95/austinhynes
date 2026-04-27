@@ -29,14 +29,16 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "austin hynes" },
+      { name: "description", content: "A one-page website showcasing business technology solutions with a dynamic AI background." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "austin hynes" },
+      { property: "og:description", content: "A one-page website showcasing business technology solutions with a dynamic AI background." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "austin hynes" },
+      { name: "twitter:description", content: "A one-page website showcasing business technology solutions with a dynamic AI background." },
     ],
     links: [
       {
